@@ -10,6 +10,7 @@ from rich.console import Console
 from rich.table import Table
 
 console = Console()
+err_console = Console(stderr=True)
 
 _json_mode = True
 
@@ -42,7 +43,7 @@ def print_table(rows: list[dict], columns: list[str] | None = None) -> None:
 
 def output(data: Any, columns: list[str] | None = None) -> None:
     if data is None:
-        console.print("[red]Error: API returned no data (check license or permissions).[/red]", file=sys.stderr)
+        err_console.print("[red]Error: API returned no data (check license or permissions).[/red]")
         return
     if _json_mode:
         print_json(data)
